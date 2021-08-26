@@ -20,8 +20,6 @@ bd.once('open', () => consele.log('STATUT BD : ', bd.states[bd._readyStates]))
 app.use(express.JSON)
 app.user(cors({ origin: '*', exposedHeaders: 'authorization' }))
 
-
-
 const HOST = process.env.HOST || "http://localhost";
 const PORT = process.env.PORT || 3000;
 
