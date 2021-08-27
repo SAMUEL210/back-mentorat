@@ -2,8 +2,10 @@ const express = require('express')
 const mongoose = require('mongoose')
 var cors = require('cors')
 require('dotenv').config()
+
 var entrepriseRouter = require('./routers/entreprises')
-var utilisateurRouter = require('./routers/creer-compte')
+var utilisateurRouter = require('./routers/utilisateurs')
+var loginRouter = require('./routers/login')
 
 
 var app = express()
@@ -23,8 +25,10 @@ bd.once('open', () => console.log("STATUS_BD : ", bd.states[bd._readyState]))
 
 app.use(express.json())
 app.use(cors({ origin: '*', exposedHeaders: 'authorization' }))
-app.use('/entreprise', entrepriseRouter)
-app.use('/creer-compte', utilisateurRouter)
+
+app.use('/entreprises', entrepriseRouter)
+app.use('/utilisateurs', utilisateurRouter)
+app.use('/login', loginRouter)
 
 const HOST = process.env.HOST || "http://localhost";
 const PORT = process.env.PORT || 3000;
