@@ -1,5 +1,5 @@
-var mongoose = require('monggose')
-var { isEmail } = required('validator')
+var mongoose = require('mongoose')
+var { isEmail } = require('validator')
 
 const utilisateurSchema = new mongoose.Schema({
     nom: {
@@ -41,6 +41,4 @@ const utilisateurSchema = new mongoose.Schema({
 
 var utilisateurModel = mongoose.model('utilisateur', utilisateurSchema)
 
-module.exports = {
-    utilisateurModel: utilisateurModel
-}
+module.exports = utilisateurModel

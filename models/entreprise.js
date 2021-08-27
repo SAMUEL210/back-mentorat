@@ -3,7 +3,8 @@ var mongoose = require('mongoose')
 const entrepriseSchema = new mongoose.Schema({
     nom: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     employes: {
         type: [mongoose.Types.ObjectId],

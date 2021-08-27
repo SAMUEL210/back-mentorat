@@ -1,7 +1,10 @@
 const express = require('express')
 const mongoose = require('mongoose')
-var cors = raquire('cors')
+var cors = require('cors')
 require('dotenv').config()
+var entrepriseRouter = require('./routers/entreprises')
+var utilisateurRouter = require('./routers/creer-compte')
+
 
 var app = express()
 
@@ -9,16 +12,19 @@ mongoose.Promise = Promise
 mongoose.connect(process.env.bd_url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useCreateIndex: true
 })
 var bd = mongoose.connection
 
 bd.on('error', console.error.bind(console, "ERREUR CONNECTION : "))
-bd.once('open', () => consele.log('STATUT BD : ', bd.states[bd._readyStates]))
+bd.once('open', () => console.log("STATUS_BD : ", bd.states[bd._readyState]))
 
 
-app.use(express.JSON)
-app.user(cors({ origin: '*', exposedHeaders: 'authorization' }))
+app.use(express.json())
+app.use(cors({ origin: '*', exposedHeaders: 'authorization' }))
+app.use('/entreprise', entrepriseRouter)
+app.use('/creer-compte', utilisateurRouter)
 
 const HOST = process.env.HOST || "http://localhost";
 const PORT = process.env.PORT || 3000;
