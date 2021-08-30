@@ -19,14 +19,13 @@ router.post("/", async(req, rep) => {
                     if (result == true) {
                         const token = createToken(utilisateur);
                         rep.header("Authorization", token);
-                        delete utilisateur.mp;
-                        rep.send({ utilisateur: utilisateur });
+                        rep.send({ id: utilisateur._id });
                     } else rep.send({ error: "Identifiants incorrectes!", cause: 'Identifiants' });
                 });
             } else rep.send({ error: "Identifiants incorrectes!", cause: 'Identifiants' });
         }
     } catch (e) {
-        rep.send(e)
+        rep.send({ error: e.message })
     }
 });
 

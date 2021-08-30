@@ -45,7 +45,7 @@ router.get("/", async(req, rep) => {
 //GET tous les utlisateur http://hote:port/utilisateur/:id
 router.get("/:id", async(req, rep) => {
     try {
-        var utilisateur = await utilisateurModel.find({ _id: req.params.id });
+        var utilisateur = await utilisateurModel.findOne({ _id: req.params.id });
         rep.send({ utilisateur });
     } catch (e) {
         rep.send({ error: e.message });
@@ -62,4 +62,6 @@ router.delete("/:id", async(req, rep) => {
         rep.send({ error: e.message });
     }
 });
+
+
 module.exports = router;
