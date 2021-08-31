@@ -16,7 +16,7 @@ router.post("/", async(req, rep) => {
 });
 
 //GET tous les entreprises http://hote:port/entreprises/*
-router.get("/", checkToken, async(req, rep) => {
+router.get("/", async(req, rep) => {
     try {
         var entreprises = await entrepriseModel.find({});
         rep.send({ entreprises });
@@ -27,7 +27,7 @@ router.get("/", checkToken, async(req, rep) => {
 });
 
 //Get une entreprise par son ID http://hote:port/entreprises/id
-router.get("/:id", checkToken, async(req, rep) => {
+router.get("/:id", async(req, rep) => {
     try {
         var entreprises = await entrepriseModel.findOne({ _id: req.params.id });
         rep.send({ entreprises });
