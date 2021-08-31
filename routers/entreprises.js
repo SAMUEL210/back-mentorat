@@ -3,7 +3,7 @@ var entrepriseModel = require('../models/entreprise')
 var { createToken, checkToken } = require('../utilities/token')
 var router = express.Router()
 
-//Ajoute un utilisateur http://hote:port/entreprise/
+//Ajouter une entreprise http://hote:port/entreprises/
 router.post("/", async(req, rep) => {
     let { body } = req;
     try {
@@ -15,8 +15,8 @@ router.post("/", async(req, rep) => {
     }
 });
 
-//GET tous les utlisateur http://hote:port/entreprise/*
-router.get("/", async(req, rep) => {
+//GET tous les entreprises http://hote:port/entreprises/*
+router.get("/", checkToken, async(req, rep) => {
     try {
         var entreprises = await entrepriseModel.find({});
         rep.send({ entreprises });
@@ -26,18 +26,18 @@ router.get("/", async(req, rep) => {
 
 });
 
-//Get un utilisateur par son ID http://hote:port/entreprises/id
-router.get("/:id", async(req, rep) => {
+//Get une entreprise par son ID http://hote:port/entreprises/id
+router.get("/:id", checkToken, async(req, rep) => {
     try {
         var entreprises = await entrepriseModel.findOne({ _id: req.params.id });
-        rep.status(200).send({ utilsentreprisesateur });
+        rep.send({ entreprises });
     } catch (e) {
         rep.send(e)
     }
 });
 
-//Modifie un utilisateur http://hote:port/entreprise/:id
-router.put("/:id", async(req, rep) => {
+//Modifie une entreprise http://hote:port/entreprises/:id
+router.put("/:id", checkToken, async(req, rep) => {
     try {
         var entreprise = await entrepriseModel.findOneAndUpdate({ _id: req.params.id },
             req.body, { new: true }
@@ -49,16 +49,14 @@ router.put("/:id", async(req, rep) => {
 
 });
 
-
-
-// //Suprimmer un utilisateur par son ID http://hote:port/utilisateurs/id
-// router.delete("/:id", async(req, rep) => {
-//     try {
-//         var utilisateur = await utModel.deleteOne({ _id: req.params.id });
-//         rep.status(200).send({ succes: "Ok" });
-//     } catch (e) {
-//         rep.status(409).send({ error: e.message });
-//     }
-// });
+//Suprimmer une entreprise par son ID http://hote:port/entreprises/id
+router.delete("/:id", checkToken, async(req, rep) => {
+    try {
+        var utilisateur = await utModel.deleteOne({ _id: req.params.id });
+        rep.send({ succes: "Ok" });
+    } catch (e) {
+        rep.send({ error: e.message });
+    }
+});
 
 module.exports = router;

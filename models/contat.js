@@ -9,6 +9,14 @@ const contratSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    mentorId: {
+        type: mongoose.Types.ObjectId,
+        required: true
+    },
+    mentoreId: {
+        type: mongoose.Types.ObjectId,
+        required: true
+    },
     accordMentor: {
         type: Boolean,
         required: false,
