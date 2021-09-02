@@ -13,7 +13,6 @@ router.post("/", async(req, rep) => {
             rep.send({ error: 'Veuillez saisir une adresse mail valide!', cause: 'Email' })
         else {
             var utilisateur = await utilisateurModel.findOne({ email: req.body.email });
-            console.log(utilisateur)
             if (utilisateur) {
                 bcrypt.compare(req.body.mp, utilisateur.mp, function(err, result) {
                     if (result == true) {

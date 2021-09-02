@@ -6,7 +6,8 @@ require('dotenv').config()
 var entrepriseRouter = require('./routers/entreprises')
 var utilisateurRouter = require('./routers/utilisateurs')
 var loginRouter = require('./routers/login')
-
+var contratRouter = require('./routers/contrats')
+var objectifRouter = require('./routers/objectifs')
 
 var app = express()
 
@@ -22,13 +23,14 @@ var bd = mongoose.connection
 bd.on('error', console.error.bind(console, "ERREUR CONNECTION : "))
 bd.once('open', () => console.log("STATUS_BD : ", bd.states[bd._readyState]))
 
-
 app.use(express.json())
 app.use(cors({ origin: '*', exposedHeaders: 'authorization' }))
 
 app.use('/entreprises', entrepriseRouter)
 app.use('/utilisateurs', utilisateurRouter)
 app.use('/login', loginRouter)
+app.use('/contrats', contratRouter)
+app.use('/objectifs', objectifRouter)
 
 const HOST = process.env.HOST || "http://localhost";
 const PORT = process.env.PORT || 3000;

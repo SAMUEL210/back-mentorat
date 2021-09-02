@@ -1,4 +1,5 @@
 var mongoose = require('mongoose')
+var objectifModel = require('../models/objectif')
 
 const contratSchema = new mongoose.Schema({
     duree: {
@@ -23,22 +24,35 @@ const contratSchema = new mongoose.Schema({
     },
     accordMentore: {
         type: Boolean,
-        required: true
+        required: false
     },
     sessions: {
         type: [mongoose.Types.ObjectId],
-        required: true
+        required: false
     },
     objectifsMentor: {
         type: [mongoose.Types.ObjectId],
-        required: true
+        required: false
     },
     objectifsMentore: {
         type: [mongoose.Types.ObjectId],
-        required: true
+        required: false
     }
 })
 
+// contratSchema.post('save', async function(next) {
+//     if (this.objectifsMentor != '') {
+//         for (obj in objectifMentor) {
+//             let objectif = objectifModel({
+//                 valeur: objectif,
+//                 par: this.mentorId,
+//                 pour: this._id
+//             })
+//             await objectif.save()
+//             next()
+//         }
+//     }
+// })
 var contratModel = mongoose.model('contrat', contratSchema)
 
 module.exports = contratModel;

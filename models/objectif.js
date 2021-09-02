@@ -5,9 +5,17 @@ const objectifSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    par: {
+        type: mongoose.Types.ObjectId,
+        required: true
+    },
+    pour: {
+        type: mongoose.Types.ObjectId,
+        required: true
+    },
     estAtteint: {
         type: Boolean,
-        required: true
+        required: false
     }
 })
 

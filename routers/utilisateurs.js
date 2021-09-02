@@ -15,21 +15,16 @@ router.post("/", async(req, rep) => {
         if (ut) {
             rep.send({ error: 'Un utilisateur avec cet adresse mail existe déjà!', cause: 'Email' })
         } else {
-            // let saltRounds = 10;
-            // let { body } = req;
-            // const hash = bcrypt.hashSync(body.mp, saltRounds);
-            // body.mp = hash
             try {
                 var utilisateur = new utilisateurModel(req.body);
                 await utilisateur.save();
                 rep.send({ utilisateur });
             } catch (e) {
-                rep.send({ error: e.message });
+                rep.send({ error: e });
             }
         }
 
     }
-
 });
 
 //GET tous les utlisateur http://hote:port/utilisateurs/*

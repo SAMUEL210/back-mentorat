@@ -44,7 +44,7 @@ router.put("/:id", checkToken, async(req, rep) => {
         );
         rep.send({ entreprise });
     } catch (e) {
-        rep.send(e)
+        rep.send({ error: e })
     }
 
 });
