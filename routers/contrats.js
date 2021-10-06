@@ -13,8 +13,6 @@ router.post('/', checkToken, async(req, rep) => {
         else {
             let mentor = await utilisateurModel.findOne({ _id: body.mentorId })
             let mentore = await utilisateurModel.findOne({ _id: body.mentoreId })
-            console.log(mentor)
-            console.log(mentore)
             if (mentor && mentore) {
                 var contrat = new contratModel(body)
                 await contrat.save()
